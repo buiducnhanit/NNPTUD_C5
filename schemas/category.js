@@ -9,7 +9,8 @@ let categorySchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
-    }
+    },
+    isDelete: { type: Boolean, default: false }
 }, {
     timeseries: true
 })

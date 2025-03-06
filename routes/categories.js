@@ -12,6 +12,27 @@ router.get('/', async function (req, res, next) {
     });
 });
 
+router.get('/:id', async function (req, res, next) {
+    try {
+        let category = await categoryModel.findById(req.params.id);
+        if (!category) {
+            return res.status(404).send({
+                success: false,
+                message: 'Category not found'
+            });
+        }
+        res.status(200).send({
+            success: true,
+            message: category
+        });
+    } catch (error) {
+        res.status(400).send({
+            success: false,
+            message: error.message
+        });
+    }
+});
+
 router.post('/', async function (req, res, next) {
     try {
         let newCategory = new categoryModel({
